@@ -26,7 +26,7 @@ const wtfJson = require("wtf-json");
 
 ```js
 wtfJson(
-  '{ name: Yoann, "isAdmin":: true, address: { country: `CA` }, null, "roles": [::,,"admin", client, :user] }'
+  '{ name Yoann, :"isAdmin":: true,, address: { country: `CA` }, null, {}, "roles": [::,,"admin" client, :user] }'
 );
 /*
  * Will be parse as follow:
