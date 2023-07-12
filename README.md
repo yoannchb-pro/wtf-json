@@ -16,6 +16,8 @@ Or with the CDN
 
 ## Import
 
+Only for nodejs and module script
+
 ```js
 import wtfJson from "wtf-json";
 //or
