@@ -1,8 +1,2 @@
-type JSONPrimitif = string | number | boolean | null;
-type JSONObject = {
-    [key: string]: JSONResult;
-};
-type JSONArray = JSONResult[];
-type JSONResult = JSONObject | JSONArray | JSONPrimitif;
-declare const _default: (str?: string | number | boolean) => JSONResult;
+declare const _default: <T = any>(str?: string | number | boolean) => T;
 export { _default as default };

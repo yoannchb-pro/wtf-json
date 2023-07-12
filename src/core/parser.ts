@@ -1,10 +1,4 @@
 import type { ASTArray, ASTObject, ASTResult, ASTSimple } from "../types/ast";
-import type {
-  JSONArray,
-  JSONObject,
-  JSONResult,
-  JSONPrimitif,
-} from "../types/json";
 import ASTBuilder from "./astBuilder";
 import Tokenizer from "./tokenizer";
 
@@ -39,20 +33,22 @@ class Parser {
    * @param str
    * @returns
    */
-  parse(str?: string | null | boolean | number | undefined): JSONResult {
+  parse<T = any>(str?: string | null | boolean | number | undefined): T {
     str = String(str);
     const tokens = this.tokenizer.tokenize(str);
     const ast = this.astBuilder.buildAST(tokens);
     if (ast.properties.length > 1)
-      return ast.properties.map((property) => this.parseASTBranch(property));
-    return ast.properties.length > 0
-      ? this.parseASTBranch(ast.properties[0])
-      : undefined;
+      return ast.properties.map((property) =>
+        this.parseASTBranch(property)
+      ) as T;
+    return (
+      ast.properties.length > 0
+        ? this.parseASTBranch(ast.properties[0])
+        : undefined
+    ) as T;
   }
 
-  private parseASTBranch(
-    astBranch: ASTResult["properties"][number]
-  ): JSONResult {
+  private parseASTBranch(astBranch: ASTResult["properties"][number]) {
     if (astBranch.type === "OBJECT") {
       return this.parseObject(astBranch);
     }
@@ -64,16 +60,16 @@ class Parser {
     return this.parsePrimitif(astBranch);
   }
 
-  private parseArray(astBranch: ASTArray): JSONArray {
-    const json: JSONArray = [];
+  private parseArray(astBranch: ASTArray) {
+    const json: any[] = [];
     for (const property of astBranch.properties) {
       json.push(this.parseASTBranch(property));
     }
     return json;
   }
 
-  private parseObject(astBranch: ASTObject): JSONObject {
-    const json: JSONObject = {};
+  private parseObject(astBranch: ASTObject) {
+    const json: any = {};
     for (const property of astBranch.properties) {
       if (property.type !== "OBJECT_KEY") continue;
       json[property.name] =
@@ -82,7 +78,7 @@ class Parser {
     return json;
   }
 
-  private parsePrimitif(astBranch: ASTSimple): JSONPrimitif {
+  private parsePrimitif(astBranch: ASTSimple): any {
     return astBranch.value;
   }
 }

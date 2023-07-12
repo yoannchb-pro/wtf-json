@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.4
+
+- wtfJson now return an `any` type by default or you can use generic type
+
 ## 1.0.3
 
 - Support empty string

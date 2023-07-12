@@ -85,4 +85,8 @@ describe("Should parse simple type", function () {
   it("Should parse multiple types 3", function () {
     expect(wtfJson(",hello")).toBe("hello");
   });
+
+  it("Type test", function () {
+    expect(wtfJson<{ id: number }>("{ id: 6 }").id).toBe(6);
+  });
 });

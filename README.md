@@ -19,7 +19,7 @@ $ npm i @yoannchb/wtf-json
 Or with the CDN
 
 ```html
-<script src="https://unpkg.com/@yoannchb/wtf-json@1.0.3/dist/index.js"></script>
+<script src="https://unpkg.com/@yoannchb/wtf-json@1.0.4/dist/index.js"></script>
 ```
 
 ## Import
@@ -30,6 +30,14 @@ Only for nodejs and module script
 import wtfJson from "wtf-json";
 //or
 const wtfJson = require("wtf-json");
+```
+
+## Type
+
+By default wtfJson return an `any` type but you can use generic type
+
+```ts
+wtfJson<{ id: number }>("{ id: 6 }").id; //autocompletion work and id is a number :)
 ```
 
 ## Examples of use
