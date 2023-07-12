@@ -3,12 +3,14 @@ import type {
   ASTArray,
   ASTBoolean,
   ASTChildren,
+  ASTNaN,
   ASTNull,
   ASTNumber,
   ASTObject,
   ASTObjectKey,
   ASTResult,
   ASTString,
+  ASTUndefined,
 } from "../types/ast";
 import type TokenizerResult from "../types/tokenizerResult";
 
@@ -63,7 +65,21 @@ class ASTBuilder {
   private appendNullValue(token: TokenizerResult): ASTNull {
     return {
       type: "NULL_VALUE",
-      value: null as null,
+      value: null,
+    };
+  }
+
+  private appendUndefinedValue(token: TokenizerResult): ASTUndefined {
+    return {
+      type: "UNDEFINED_VALUE",
+      value: undefined,
+    };
+  }
+
+  private appendNaNValue(token: TokenizerResult): ASTNaN {
+    return {
+      type: "NAN_VALUE",
+      value: NaN,
     };
   }
 
@@ -130,6 +146,10 @@ class ASTBuilder {
         addASTBranch(this.appendBoolean(actualToken));
       } else if (actualToken.type === "NULL") {
         addASTBranch(this.appendNullValue(actualToken));
+      } else if (actualToken.type === "UNDEFINED") {
+        addASTBranch(this.appendUndefinedValue(actualToken));
+      } else if (actualToken.type === "NAN") {
+        addASTBranch(this.appendNaNValue(actualToken));
       } else if (actualToken.type === "NUMBER") {
         addASTBranch(this.appendNumber(actualToken));
       } else if (

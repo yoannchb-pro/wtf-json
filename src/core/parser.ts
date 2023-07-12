@@ -17,6 +17,8 @@ const TOKENS = {
   TRUE_BOOLEAN: /true/,
   FALSE_BOOLEAN: /false/,
   NULL: /null/,
+  UNDEFINED: /undefined/,
+  NAN: /NaN/,
   START_BRACKET: /\[/,
   END_BRACKET: /\]/,
   START_BRACE: /\{/,
@@ -37,7 +39,7 @@ class Parser {
    * @param str
    * @returns
    */
-  parse(str: string | null | boolean | number): JSONResult {
+  parse(str: string | null | boolean | number | undefined): JSONResult {
     str = String(str);
     const tokens = this.tokenizer.tokenize(str);
     const ast = this.astBuilder.buildAST(tokens);

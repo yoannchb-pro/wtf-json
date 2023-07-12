@@ -18,7 +18,23 @@ type ASTNull = {
   value: null;
 };
 
-type ASTSimple = ASTNull | ASTString | ASTBoolean | ASTNumber;
+type ASTUndefined = {
+  type: "UNDEFINED_VALUE";
+  value: undefined;
+};
+
+type ASTNaN = {
+  type: "NAN_VALUE";
+  value: number;
+};
+
+type ASTSimple =
+  | ASTNull
+  | ASTNaN
+  | ASTUndefined
+  | ASTString
+  | ASTBoolean
+  | ASTNumber;
 
 type ASTObjectKey = {
   type: "OBJECT_KEY";
@@ -40,6 +56,8 @@ type ASTFinalValue =
   | ASTArray
   | ASTBoolean
   | ASTNull
+  | ASTNaN
+  | ASTUndefined
   | ASTNumber
   | ASTObject
   | ASTString;
@@ -54,6 +72,8 @@ type ASTAnyValue =
   | ASTArray
   | ASTBoolean
   | ASTNull
+  | ASTNaN
+  | ASTUndefined
   | ASTNumber
   | ASTObject
   | ASTString
@@ -63,6 +83,8 @@ export {
   ASTArray,
   ASTBoolean,
   ASTNull,
+  ASTUndefined,
+  ASTNaN,
   ASTNumber,
   ASTObject,
   ASTObjectKey,

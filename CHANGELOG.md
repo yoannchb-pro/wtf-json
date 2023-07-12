@@ -1,0 +1,11 @@
+# CHANGELOG
+
+## 1.0.2
+
+- Fixed CDN link
+- Added CHANGELOG
+- Support for `undefined` and `NaN`
+
+## 1.0.1
+
+- Initial version

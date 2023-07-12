@@ -37,8 +37,24 @@ describe("Should parse simple type", function () {
     expect(wtfJson(53.6)).toBe(53.6);
   });
 
-  it("Should not parse string", function () {
+  it("Should parse unknown", function () {
     expect(wtfJson("hello")).toBe("hello");
+  });
+
+  it("Should parse NaN", function () {
+    expect(wtfJson(NaN)).toBe(NaN);
+  });
+
+  it("Should parse NaN str", function () {
+    expect(wtfJson("NaN")).toBe(NaN);
+  });
+
+  it("Should parse undefined", function () {
+    expect(wtfJson(undefined as any)).toBe(undefined);
+  });
+
+  it("Should parse undefined str", function () {
+    expect(wtfJson("undefined")).toBe(undefined);
   });
 
   it("Should parse multiple types 1", function () {
