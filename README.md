@@ -15,7 +15,7 @@ $ npm i @yoannchb/wtf-json
 Or with the CDN
 
 ```html
-<script src="https://unpkg.com/@yoannchb/wtf-json@1.0.0/dist/index.js"></script>
+<script src="https://unpkg.com/@yoannchb/wtf-json@1.0.1/dist/index.js"></script>
 ```
 
 ## Import
