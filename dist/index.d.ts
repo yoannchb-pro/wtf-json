@@ -4,5 +4,5 @@ type JSONObject = {
 };
 type JSONArray = JSONResult[];
 type JSONResult = JSONObject | JSONArray | JSONPrimitif;
-declare const _default: (str: string | number | boolean) => JSONResult;
+declare const _default: (str?: string | number | boolean) => JSONResult;
 export { _default as default };

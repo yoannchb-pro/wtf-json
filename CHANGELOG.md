@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.3
+
+- Support empty string
+
 ## 1.0.2
 
 - Fixed CDN link

@@ -39,13 +39,15 @@ class Parser {
    * @param str
    * @returns
    */
-  parse(str: string | null | boolean | number | undefined): JSONResult {
+  parse(str?: string | null | boolean | number | undefined): JSONResult {
     str = String(str);
     const tokens = this.tokenizer.tokenize(str);
     const ast = this.astBuilder.buildAST(tokens);
     if (ast.properties.length > 1)
       return ast.properties.map((property) => this.parseASTBranch(property));
-    return this.parseASTBranch(ast.properties[0]);
+    return ast.properties.length > 0
+      ? this.parseASTBranch(ast.properties[0])
+      : undefined;
   }
 
   private parseASTBranch(

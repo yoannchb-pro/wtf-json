@@ -1,6 +1,6 @@
 {
   "name": "@yoannchb/wtf-json",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Parse any kind of broken json for scrapping easily",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

@@ -57,6 +57,23 @@ describe("Should parse simple type", function () {
     expect(wtfJson("undefined")).toBe(undefined);
   });
 
+  it("Should parse without argument", function () {
+    expect(wtfJson()).toBe(undefined);
+  });
+
+  it("Should parse with empty str", function () {
+    expect(wtfJson("")).toBe(undefined);
+  });
+
+  it("Should parse with white space str", function () {
+    expect(
+      wtfJson(`
+        
+            
+    `)
+    ).toBe(undefined);
+  });
+
   it("Should parse multiple types 1", function () {
     expect(wtfJson("null,{}")).toEqual([null, {}]);
   });
