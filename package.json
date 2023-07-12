@@ -1,6 +1,6 @@
 {
   "name": "@yoannchb/wtf-json",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Parse any kind of broken json for scrapping easily",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yoannchb-pro/own-json-parser.git"
+    "url": "git+https://github.com/yoannchb-pro/wtf-json.git"
   },
   "keywords": [
     "scrapping",

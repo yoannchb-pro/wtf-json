@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5
+
+- Fixed github link
+
 ## 1.0.4
 
 - wtfJson now return an `any` type by default or you can use generic type
