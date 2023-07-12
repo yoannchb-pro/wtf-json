@@ -10,7 +10,7 @@ import Tokenizer from "./tokenizer";
 
 const TOKENS = {
   STRING: /("|'|`)(?:\\\1|.|\n)*?\1/,
-  NUMBER: /\d+(?:.\d+)?/,
+  NUMBER: /(?:\d+(?:\.\d*)?)|(?:\.\d+)/,
   WHITE_SPACE: /\s+/,
   COMA: /,/,
   COLON: /:/,
@@ -40,13 +40,15 @@ class Parser {
   parse(str: string | null | boolean | number): JSONResult {
     str = String(str);
     const tokens = this.tokenizer.tokenize(str);
-    console.log(tokens);
     const ast = this.astBuilder.buildAST(tokens);
-    console.log(ast);
-    return this.parseASTBranch(ast.value);
+    if (ast.properties.length > 1)
+      return ast.properties.map((property) => this.parseASTBranch(property));
+    return this.parseASTBranch(ast.properties[0]);
   }
 
-  private parseASTBranch(astBranch: ASTResult["value"]): JSONResult {
+  private parseASTBranch(
+    astBranch: ASTResult["properties"][number]
+  ): JSONResult {
     if (astBranch.type === "OBJECT") {
       return this.parseObject(astBranch);
     }
@@ -69,6 +71,7 @@ class Parser {
   private parseObject(astBranch: ASTObject): JSONObject {
     const json: JSONObject = {};
     for (const property of astBranch.properties) {
+      if (property.type !== "OBJECT_KEY") continue;
       json[property.name] =
         property.value === null ? null : this.parseASTBranch(property.value);
     }

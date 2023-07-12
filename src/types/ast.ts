@@ -46,7 +46,7 @@ type ASTFinalValue =
 
 type ASTResult = {
   type: "JSON";
-  value: ASTFinalValue;
+  properties: ASTFinalValue[];
 };
 
 type ASTChildren = ASTResult | ASTArray | ASTObjectKey | ASTObject;

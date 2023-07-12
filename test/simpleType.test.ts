@@ -1,43 +1,55 @@
-import JSONParser from "../dist";
+import wtfJson from "../dist";
 
 describe("Should parse simple type", function () {
   it("Should parse null str", function () {
-    expect(JSONParser("null")).toBe(null);
+    expect(wtfJson("null")).toBe(null);
   });
 
   it("Should parse true str", function () {
-    expect(JSONParser("true")).toBe(true);
+    expect(wtfJson("true")).toBe(true);
   });
 
   it("Should parse false str", function () {
-    expect(JSONParser("false")).toBe(false);
+    expect(wtfJson("false")).toBe(false);
   });
 
   it("Should parse a string str", function () {
-    expect(JSONParser('"hello world"')).toBe("hello world");
+    expect(wtfJson('"hello world"')).toBe("hello world");
   });
 
   it("Should parse a number str", function () {
-    expect(JSONParser("53.6")).toBe(53.6);
+    expect(wtfJson("53.6")).toBe(53.6);
   });
 
   it("Should parse null", function () {
-    expect(JSONParser(null as any)).toBe(null);
+    expect(wtfJson(null as any)).toBe(null);
   });
 
   it("Should parse true", function () {
-    expect(JSONParser(true)).toBe(true);
+    expect(wtfJson(true)).toBe(true);
   });
 
   it("Should parse false", function () {
-    expect(JSONParser(false)).toBe(false);
+    expect(wtfJson(false)).toBe(false);
   });
 
   it("Should parse a number", function () {
-    expect(JSONParser(53.6)).toBe(53.6);
+    expect(wtfJson(53.6)).toBe(53.6);
   });
 
   it("Should not parse string", function () {
-    expect(() => JSONParser("hello")).toThrow(SyntaxError);
+    expect(wtfJson("hello")).toBe("hello");
+  });
+
+  it("Should parse multiple types 1", function () {
+    expect(wtfJson("null,{}")).toEqual([null, {}]);
+  });
+
+  it("Should parse multiple types 2", function () {
+    expect(wtfJson("true,")).toBe(true);
+  });
+
+  it("Should parse multiple types 3", function () {
+    expect(wtfJson(",hello")).toBe("hello");
   });
 });

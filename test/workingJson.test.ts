@@ -1,4 +1,4 @@
-import JSONParser from "../dist";
+import wtfJson from "../dist";
 
 const json = {
   error: false,
@@ -28,6 +28,6 @@ const json = {
 
 describe("Should parse a working JSON", function () {
   it("Should parse a working JSON", function () {
-    expect(JSONParser(JSON.stringify(json))).toEqual(json);
+    expect(wtfJson(JSON.stringify(json))).toEqual(json);
   });
 });

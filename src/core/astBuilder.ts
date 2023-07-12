@@ -109,7 +109,7 @@ class ASTBuilder {
    * @returns
    */
   buildAST(tokens: TokenizerResult[]) {
-    const tree: ASTResult = { type: "JSON", value: null };
+    const tree: ASTResult = { type: "JSON", properties: [] };
     const childrens: ASTChildren[] = [tree];
 
     let lastScannedToken: TokenizerResult = null;
@@ -161,7 +161,7 @@ class ASTBuilder {
       } else if (actualToken.type === "COMA") {
         if (actualChild.type === "OBJECT_KEY") childrens.pop();
       } else if (actualToken.type === "COLON") {
-        //TODO
+        //TODO: Actually we skip useless COLON
       }
 
       if (actualToken.type !== "WHITE_SPACE") lastScannedToken = actualToken;

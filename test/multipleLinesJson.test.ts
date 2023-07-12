@@ -1,4 +1,4 @@
-import JSONParser from "../dist";
+import wtfJson from "../dist";
 
 const json = {
   error: false,
@@ -29,7 +29,7 @@ const json = {
 describe("Should parse a working JSON", function () {
   it("Should parse a working JSON", function () {
     expect(
-      JSONParser(`
+      wtfJson(`
 {
   "error": false,
   "description": "some data",
