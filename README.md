@@ -22,11 +22,11 @@ import wtfJson from "wtf-json";
 const wtfJson = require("wtf-json");
 ```
 
-## Usage
+## Example of brokens JSON with output
 
 ```js
 wtfJson(
-  '{ name Yoann, :"isAdmin":: true,, address: { country: `CA` }, null, {}, "roles": [::,,"admin" client, :user] }'
+  '{ name Yoann, :"isAdmin":: true,, address: { country: `CA` }, null, {}, "roles": [::,,\'admin\' client, :user], emoji: ":happy:" }'
 );
 /*
  * Will be parse as follow:
@@ -36,7 +36,8 @@ wtfJson(
  *  address: {
  *   country: "CA"
  *  },
- *  roles: ["admin", "client", "user"]
+ *  roles: ["admin", "client", "user"],
+ *  emoji: ":happy:"
  * }
  */
 
