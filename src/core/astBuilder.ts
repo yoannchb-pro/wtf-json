@@ -152,11 +152,10 @@ class ASTBuilder {
         const child = this.appendObject(actualToken);
         addASTBranch(child);
         childrens.push(child);
-      } else if (actualToken.type === "END_BRACKET") {
+      } else if (actualToken.type === "END_BRACKET" && childrens.length !== 1) {
         childrens.pop();
-      } else if (actualToken.type === "END_BRACE") {
+      } else if (actualToken.type === "END_BRACE" && childrens.length !== 1) {
         if (actualChild.type === "OBJECT_KEY") childrens.pop();
-
         childrens.pop();
       } else if (actualToken.type === "COMA") {
         if (actualChild.type === "OBJECT_KEY") childrens.pop();
