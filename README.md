@@ -1,6 +1,10 @@
 # wtf-json
 
-Parse any kind of broken json for scrapping easily. The goal is to never get any error when parsing your JSON.
+Parse any kind of broken json for scrapping easily.
+
+## Goal
+
+The primary objective is to ensure error-free parsing of JSON data. This tool enables you to parse any JSON or JavaScript object, regardless of its validity. Whether the input is a valid JSON or not, you can rely on this tool to handle it seamlessly without encountering any errors.
 
 ## Install
 
