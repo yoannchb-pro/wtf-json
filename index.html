@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WTF JSON</title>
+    <script src="./dist/index.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #00dbde;
+        background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+      }
+
+      a {
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      header {
+        display: flex;
+        padding: 3rem;
+        align-items: center;
+        justify-content: center;
+      }
+
+      section {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      textarea {
+        border: none;
+        outline: none;
+        border-radius: 1rem;
+        resize: none;
+        overflow: auto;
+        flex: 1 1;
+        min-width: 20rem;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.75);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="https://github.com/yoannchb-pro/wtf-json" target="_blank"
+        ><h1>wtfJson | A typescript librairie to parse any kind of JSON</h1></a
+      >
+    </header>
+    <section>
+      <textarea
+        id="input"
+        placeholder="Input (for example: [hello,, world])"
+      ></textarea>
+      <textarea
+        id="output"
+        readonly
+        placeholder="Output (should give: ['hello', 'world'])"
+      ></textarea>
+    </section>
+  </body>
+  <script>
+    const input = document.querySelector("#input");
+    const output = document.querySelector("#output");
+
+    const exec = () => {
+      const json = input.value;
+      const result = wtfJson(json);
+      if (json) output.value = JSON.stringify(result, undefined, 4);
+      else output.value = "";
+    };
+
+    input.addEventListener("input", exec);
+  </script>
+</html>

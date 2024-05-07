@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.6
+
+- Fixed tokenizer
+- WebPage
+
 ## 1.0.5
 
 - Fixed github link
