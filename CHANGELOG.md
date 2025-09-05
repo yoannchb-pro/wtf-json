@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.7
+
+- Big perf improvement
+- Support for negative numbers
+
 ## 1.0.6
 
 - Fixed tokenizer

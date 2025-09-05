@@ -3,20 +3,20 @@ import ASTBuilder from "./astBuilder";
 import Tokenizer from "./tokenizer";
 
 const TOKENS = {
-  STRING: /("|'|`)(?:\\\1|.|\n)*?\1/,
-  NUMBER: /(?:\d+(?:\.\d*)?)|(?:\.\d+)/,
-  WHITE_SPACE: /\s+/,
-  COMA: /,/,
-  COLON: /:/,
-  TRUE_BOOLEAN: /true/,
-  FALSE_BOOLEAN: /false/,
-  NULL: /null/,
-  UNDEFINED: /undefined/,
-  NAN: /NaN/,
-  START_BRACKET: /\[/,
-  END_BRACKET: /\]/,
-  START_BRACE: /\{/,
-  END_BRACE: /\}/,
+  STRING: /^("|'|`)(?:\\\1|.|\n)*?\1/,
+  NUMBER: /^-?(?:\d+(?:\.\d*)?|\.\d+)/,
+  WHITE_SPACE: /^\s+/,
+  COMA: /^,/,
+  COLON: /^:/,
+  TRUE_BOOLEAN: /^true/,
+  FALSE_BOOLEAN: /^false/,
+  NULL: /^null/,
+  UNDEFINED: /^undefined/,
+  NAN: /^NaN/,
+  START_BRACKET: /^\[/,
+  END_BRACKET: /^\]/,
+  START_BRACE: /^\{/,
+  END_BRACE: /^\}/,
 } as const;
 
 /**

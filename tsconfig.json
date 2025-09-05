@@ -6,10 +6,8 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2018",
     "noImplicitAny": true,
-    "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "resolveJsonModule": true,
     "types": ["node", "jest"],
     "declaration": true,
     "typeRoots": ["node_modules/@types"]

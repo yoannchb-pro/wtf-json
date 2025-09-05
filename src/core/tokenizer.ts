@@ -139,44 +139,59 @@ class Tokenizer<
 
     const defaultType = this.getDefaultType();
     const concatDefaultType = this.options.concatDefaultType;
-    const tokensList = this.options.tokens;
+    const tokensList = Object.entries(this.options.tokens);
 
-    for (let charIndex = 0; charIndex < str.length; ++charIndex) {
-      const strToDo = str.substring(charIndex, str.length);
-      const strDone = str.substring(0, charIndex);
+    let index = 0;
+    let line = 0;
+    let column = 0;
 
-      const defaultResult: MatcherResult<T, D, A> = {
-        type: defaultType,
-        value: strToDo.charAt(0),
-        index: 0,
-      };
-      let result = defaultResult;
+    while (index < str.length) {
+      const remaining = str.slice(index);
+
+      let result: MatcherResult<T, D, A> | null = null;
 
       // Check if any regex is matching
-      const reversedTokens = Object.entries(tokensList).reverse(); // For prioritization
-      for (const [type, reg] of reversedTokens) {
-        const match = this.matcher(strToDo, type, reg);
-        if (match !== null) {
-          if (match.index === 0) {
-            result = match; // If the index is 0 we found the token
-          } else if (
-            this.options.prioritize &&
-            result !== defaultResult &&
-            result.value.length > match.index // Check if the current matching token that have a bigger priority, than the last one, don't have conflict with the last matched token
-          ) {
-            result = defaultResult;
-          }
+      for (const [type, reg] of tokensList) {
+        reg.lastIndex = 0;
+        const match = reg.exec(remaining);
+        if (match && match.index === 0) {
+          result = {
+            type,
+            value: match[0],
+            groups: match.groups,
+            index: 0,
+          };
+          break;
         }
       }
 
-      const splittedValueOnLines = result.value.split(/\n/g);
+      // No match -> default token
+      if (!result) {
+        result = {
+          type: defaultType,
+          value: remaining[0],
+          index: 0,
+        };
+      }
 
-      const startLine = strDone.match(/\n/g)?.length ?? 0;
-      const endLine = startLine + Math.max(splittedValueOnLines.length - 1, 0);
-      const startColumn = strDone.split(/\n/g)?.[startLine]?.length ?? 0;
-      const endColumn =
-        splittedValueOnLines[splittedValueOnLines.length - 1].length +
-        (startLine === endLine ? startColumn : 0);
+      // Line, column calculation
+      const value = result.value;
+      const lines = value.split("\n");
+      const startLine = line;
+      const startColumn = column;
+      let endLine = line;
+      let endColumn = column;
+
+      if (lines.length > 1) {
+        endLine = line + lines.length - 1;
+        endColumn = lines[lines.length - 1].length;
+      } else {
+        endColumn = column + value.length;
+      }
+
+      // Update current line/column
+      line = endLine;
+      column = endColumn;
 
       let token: Token<T, D, A> | null = {
         type: result.type,
@@ -193,7 +208,7 @@ class Tokenizer<
         : token;
 
       // We update the char index based on what we have match
-      charIndex += result.value.length - 1;
+      index += value.length;
 
       // Check the new token returned by the callback
       if (token === null) continue;
